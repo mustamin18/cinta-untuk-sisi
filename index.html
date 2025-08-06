@@ -6,70 +6,149 @@
   <title>Untukmu, Sisi</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #ffe6e6, #ffccf2);
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(to bottom right, #ffe6f0, #ffe0f5);
       font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+    .container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      height: 100%;
       text-align: center;
-      height: 100vh;
+      padding: 20px;
+      position: relative;
     }
-    h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 3em;
-      margin: 0.2em 0;
+    #text {
+      font-size: 1.6em;
       color: #d63384;
+      min-height: 80px;
     }
-    p {
-      font-size: 1.2em;
-      margin: 1em 20px;
-      color: #333;
-    }
-    .buttons {
-      margin-top: 1em;
-    }
-    button {
+    #nextBtn {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
       background-color: #ff85a2;
-      border: none;
-      padding: 10px 20px;
-      margin: 10px;
-      border-radius: 25px;
       color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
       font-size: 1em;
       cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background-color: #ff5c8a;
     }
     footer {
       position: absolute;
       bottom: 10px;
+      width: 100%;
+      text-align: center;
       font-size: 0.8em;
-      color: #777;
+      color: #888;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: fall 5s linear infinite;
+    }
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes fall {
+      0% {
+        top: -10%;
+        opacity: 1;
+      }
+      100% {
+        top: 110%;
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Hai Sisi 💖</h1>
-  <p>Ada sesuatu yang Mustamin pengen bilang langsung... tapi malah bikin website khusus buat kamu 😅</p>
-  <p>Aku suka kamu, Sisi. Serius. Dari senyummu, caramu ngobrol, sampai hal-hal kecil yang bikin aku mikir "duh lucunya dia..." 😍</p>
-  <p>Jadi… boleh nggak aku kenal kamu lebih dekat lagi? 💌</p>
-  
-  <div class="buttons">
-    <button onclick="alert('Yesss! Mustamin bakal senyum seharian 😄')">Aku juga suka kamu 💕</button>
-    <button onclick="alert('Nggak apa-apa, Mustamin tetap doain kamu bahagia ya 😊')">Pikir-pikir dulu ya 🤔</button>
+  <div class="container">
+    <div id="text"></div>
+    <button id="nextBtn">Lanjut ➤</button>
   </div>
+
+  <footer>Dibuat dengan cinta oleh Mustamin untuk Sisi 💘</footer>
 
   <audio autoplay loop>
     <source src="lagu.mp3" type="audio/mpeg">
-    Browser kamu tidak mendukung audio.
   </audio>
 
-  <footer>Dibuat dengan cinta oleh Mustamin untuk Sisi 💘</footer>
+  <script>
+    const slides = [
+      "Hai Sisi… 🌸",
+      "Website ini dibuat khusus untuk kamu ❤️",
+      "Karena ada seseorang yang diam-diam suka banget sama kamu… 😳",
+      "Dia itu… Mustamin 😁",
+      "Dan dia cuma pengen bilang…",
+      "Aku suka kamu, dari hati yang paling dalam 🥺",
+      "Kalau kamu senyum… dunia rasanya lebih cerah 🌞",
+      "Kalau kamu jawab 'ya'... Mustamin bakal joget tiap pagi 💃",
+      "Kalau belum siap, Mustamin tetap jadi orang baik di sekitarmu 😇",
+      "Maukah kamu beri kesempatan mengenal lebih dekat? 💌"
+    ];
+
+    let i = 0;
+    const textEl = document.getElementById('text');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function typeWriter(text, i = 0) {
+      if (i < text.length) {
+        textEl.innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1), 50);
+      } else {
+        nextBtn.disabled = false;
+      }
+    }
+
+    function showSlide() {
+      textEl.innerHTML = "";
+      nextBtn.disabled = true;
+      typeWriter(slides[i]);
+    }
+
+    nextBtn.addEventListener('click', () => {
+      i++;
+      if (i >= slides.length) i = 0;
+      showSlide();
+    });
+
+    showSlide();
+
+    // Animasi hati jatuh
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 300);
+  </script>
 </body>
 </html>
