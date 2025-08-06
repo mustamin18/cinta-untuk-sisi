@@ -24,17 +24,15 @@
       text-align: center;
       padding: 20px;
       position: relative;
+      flex-direction: column;
     }
     #text {
       font-size: 1.6em;
       color: #d63384;
       min-height: 80px;
+      margin-bottom: 30px;
     }
-    #nextBtn {
-      position: absolute;
-      bottom: 60px;
-      left: 50%;
-      transform: translateX(-50%);
+    #nextBtn, .choice-btn {
       background-color: #ff85a2;
       color: white;
       border: none;
@@ -42,6 +40,7 @@
       border-radius: 30px;
       font-size: 1em;
       cursor: pointer;
+      margin: 5px;
     }
     footer {
       position: absolute;
@@ -67,23 +66,16 @@
       background: red;
       border-radius: 50%;
     }
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
     @keyframes fall {
-      0% {
-        top: -10%;
-        opacity: 1;
-      }
-      100% {
-        top: 110%;
-        opacity: 0;
-      }
+      0% { top: -10%; opacity: 1; }
+      100% { top: 110%; opacity: 0; }
+    }
+    #choices {
+      display: none;
+      flex-direction: column;
+      align-items: center;
     }
   </style>
 </head>
@@ -91,6 +83,15 @@
   <div class="container">
     <div id="text"></div>
     <button id="nextBtn">Lanjut ➤</button>
+
+    <div id="choices">
+      <button class="choice-btn" onclick="window.open('https://wa.me/62xxxxxxxxxx?text=Hai%20Mustamin%2C%20aku%20juga%20punya%20perasaan%20yang%20sama%20%F0%9F%92%95','_blank')">
+        ✅ Aku juga suka kamu
+      </button>
+      <button class="choice-btn" onclick="alert('Gak apa-apa 😇 Mustamin akan tetap menunggu sampai kamu siap. 🌸')">
+        🕊️ Belum siap
+      </button>
+    </div>
   </div>
 
   <footer>Dibuat dengan cinta oleh Mustamin untuk Sisi 💘</footer>
@@ -116,6 +117,7 @@
     let i = 0;
     const textEl = document.getElementById('text');
     const nextBtn = document.getElementById('nextBtn');
+    const choices = document.getElementById('choices');
 
     function typeWriter(text, i = 0) {
       if (i < text.length) {
@@ -134,8 +136,13 @@
 
     nextBtn.addEventListener('click', () => {
       i++;
-      if (i >= slides.length) i = 0;
-      showSlide();
+      if (i < slides.length) {
+        showSlide();
+      } else {
+        textEl.innerHTML = "Sekarang keputusan ada di tanganmu, Sisi... 💞";
+        nextBtn.style.display = "none";
+        choices.style.display = "flex";
+      }
     });
 
     showSlide();
