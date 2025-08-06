@@ -135,7 +135,11 @@
       typeWriter(slides[i]);
     }
 
-    nextBtn.addEventListener('click', () => {
+    const audio = document.getElementById("bgm");
+nextBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play().catch(e => console.log("Autoplay diblokir, aktif saat klik."));
+  }
       i++;
       if (i < slides.length) {
         showSlide();
