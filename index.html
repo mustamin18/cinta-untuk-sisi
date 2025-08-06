@@ -85,7 +85,7 @@
     <button id="nextBtn">Lanjut ➤</button>
 
     <div id="choices">
-      <button class="choice-btn" onclick="window.open('https://wa.me/62xxxxxxxxxx?text=Hai%20Mustamin%2C%20aku%20juga%20punya%20perasaan%20yang%20sama%20%F0%9F%92%95','_blank')">
+      <button class="choice-btn" onclick="window.open('https://wa.me/6282320682062?text=Hai%20Mustamin%2C%20aku%20juga%20punya%20perasaan%20yang%20sama%20%F0%9F%92%95','_blank')">
         ✅ Aku juga suka kamu
       </button>
       <button class="choice-btn" onclick="alert('Gak apa-apa 😇 Mustamin akan tetap menunggu sampai kamu siap. 🌸')">
@@ -99,6 +99,27 @@
   <audio autoplay loop>
     <source src="lagu.mp3" type="audio/mpeg">
   </audio>
+
+  const audio = document.getElementById('bgm');
+
+// Aktifkan musik saat tombol pertama diklik
+nextBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play().catch(e => {
+      console.log('Autoplay ditolak, akan aktif saat user klik');
+    });
+  }
+
+  i++;
+  if (i < slides.length) {
+    showSlide();
+  } else {
+    textEl.innerHTML = "Sekarang keputusan ada di tanganmu, Sisi... 💞";
+    nextBtn.style.display = "none";
+    choices.style.display = "flex";
+  }
+});
+
 
   <script>
     const slides = [
