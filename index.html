@@ -100,25 +100,13 @@
     <source src="lagu.mp3" type="audio/mpeg">
   </audio>
 
-  const audio = document.getElementById('bgm');
-
-// Aktifkan musik saat tombol pertama diklik
-nextBtn.addEventListener('click', () => {
-  if (audio.paused) {
-    audio.play().catch(e => {
-      console.log('Autoplay ditolak, akan aktif saat user klik');
-    });
-  }
-
-  i++;
-  if (i < slides.length) {
-    showSlide();
-  } else {
-    textEl.innerHTML = "Sekarang keputusan ada di tanganmu, Sisi... 💞";
-    nextBtn.style.display = "none";
-    choices.style.display = "flex";
-  }
-});
+<button id="playBtn">Putar Musik</button>
+<script>
+  const playBtn = document.getElementById('playBtn');
+  playBtn.addEventListener('click', () => {
+    audio.play().catch(err => console.log(err));
+  });
+</script>
 
 
   <script>
