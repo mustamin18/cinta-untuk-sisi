@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -44,7 +45,7 @@
     }
     footer {
       position: absolute;
-      bottom: 10px;
+      bottom: 5px;
       width: 100%;
       text-align: center;
       font-size: 0.65em;
@@ -96,10 +97,9 @@
 
   <footer>Dibuat dengan cinta oleh Mustamin untuk Sisi 💘</footer>
 
-<audio id="bgm" loop>
-  <source src="lagu.mp3" type="audio/mpeg">
-</audio>
-
+  <audio id="bgm" loop>
+    <source src="lagu.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     const slides = [
@@ -109,14 +109,13 @@
       "Ini adalah caraku, menyampaikan sesuatu yang muncul terus di kepalaku. ❤️",
       "Setiap kali kamu tersenyum, rasanya seperti dunia ikut tersenyum juga ☀️",
       "Setiap kamu berbicara, hati ini tenang... bahkan saat hari sedang kacau. 🎧",
-      "Saya paham ini terlalu cepat",
-      "Tapi masing saling menguatkan dan buat hal-hal bahagia",
-      "..........",
-      "Dan cuma mau bilang…",
+      "Saya paham ini terlalu cepat, tapi kadang perasaan nggak bisa diatur.",
+      "Kalau kita saling menguatkan, mungkin kita bisa ciptakan hal-hal bahagia bareng. 🌈",
+      "Aku cuma mau bilang…",
       "Aku suka kamu, dari hati yang paling dalam 🥺",
       "Kalau kamu senyum… dunia rasanya lebih cerah 🌞",
-      "Kalau kamu jawab 'ya'... Taming akan selalu full senyum tiap hari 💃",
-      "Kalau belum siap, siapja tetap jadi orang baik di sekitarmu 😇",
+      "Kalau kamu jawab 'ya'... Mustamin akan selalu full senyum tiap hari 💃",
+      "Kalau belum siap, Mustamin juga akan tetap jadi orang baik di sekitarmu 😇",
       "Maukah kamu beri kesempatan mengenal lebih dekat? 💌"
     ];
 
@@ -124,6 +123,7 @@
     const textEl = document.getElementById('text');
     const nextBtn = document.getElementById('nextBtn');
     const choices = document.getElementById('choices');
+    const audio = document.getElementById("bgm");
 
     function typeWriter(text, i = 0) {
       if (i < text.length) {
@@ -140,11 +140,10 @@
       typeWriter(slides[i]);
     }
 
-    const audio = document.getElementById("bgm");
-nextBtn.addEventListener('click', () => {
-  if (audio.paused) {
-    audio.play().catch(e => console.log("Autoplay diblokir, aktif saat klik."));
-  }
+    nextBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().catch(e => console.log("Autoplay diblokir, aktif saat klik."));
+      }
       i++;
       if (i < slides.length) {
         showSlide();
